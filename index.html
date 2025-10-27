@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramalan AI – Deposit</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .console-box {
+      font-family: monospace;
+      background-color: #1a1a1a;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 0 20px #00ff88;
+      color: #00ff88;
+      height: 250px;
+      overflow-y: auto;
+    }
+    .loading-screen {
+      font-family: monospace;
+      background: #000;
+      color: #00ff88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+      z-index: 50;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .hidden-screen { display: none; }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <div id="loading" class="loading-screen">
+    <p>Memuatkan... Sila tunggu sementara kami sediakan pengalaman anda.</p>
+  </div>
+  <div id="mainContent" class="hidden-screen">
+    <header class="w-full bg-gray-800 p-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-green-400">Ramalan AI 1xBet</h1>
+      <nav class="space-x-4">
+        <a href="#how" class="hover:text-green-400">Bagaimana ia berfungsi</a>
+        <a href="#games" class="hover:text-green-400">Permainan</a>
+        <a href="#start" class="hover:text-green-400">Mula</a>
+      </nav>
+    </header>
+    <section class="min-h-screen flex flex-col items-center justify-center px-4 text-center">
+      <h2 class="text-3xl md:text-5xl font-bold mb-6">
+        Jana wang sebenar dengan ramalan AI permainan
+      </h2>
+      <div class="mb-4 text-lg font-semibold text-yellow-300">
+        👋 Selamat datang ke servis rasmi <span class="text-green-400">Arif Ismail</span>!
+      </div>
+      <p class="max-w-xl mb-8 text-gray-300">
+        Sertai ribuan pengguna yang menjana keuntungan dengan AI pintar kami dalam Aviator, Mines dan Penalty. 98% ketepatan, ramalan masa nyata dan pengeluaran segera!
+      </p>
+      <!-- ID input for connection -->
+      <input id="userId" type="text" placeholder="Masukkan ID 1xBet anda" class="bg-gray-700 text-white p-3 rounded-md mb-4" />
+      <button id="connectButton" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-xl text-lg transition">Sambungkan akaun</button>
+      <!-- Success message -->
+      <div id="connectionSuccess" class="hidden text-green-400 font-bold mt-6">
+        <p>ID akaun: <span id="accountIdDisplay">1234567890</span> berjaya disambungkan!</p>
+        <p>Status: Aktif | 100% ketepatan ramalan | Algoritma AI dianalisis</p>
+        <button id="getSignalButton" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl text-lg transition mt-4">Dapatkan isyarat</button>
+      </div>
+      <!-- Error message for deposit + PROMOCODE block -->
+      <div id="errorBox" class="hidden bg-red-600 p-6 rounded-xl max-w-md mx-auto mt-6">
+        <h2 class="text-xl font-bold mb-2">⚠️ Deposit tidak dijumpai</h2>
+        <p class="mb-4">Nampaknya baki anda kosong. Sila buat deposit sekurang-kurangnya <strong>RM25 atau lebih</strong> untuk membuka akses kepada isyarat dan mula menjana keuntungan.</p>
+        <a href="https://reffpa.com/L?tag=d_3290065m_97c_&site=3290065&ad=97&r=registration" target="_blank" id="depositButton" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition">
+          Deposit sekarang di 1xBet
+        </a>
+        <!-- Promo code -->
+        <div class="mt-6 bg-red-800 text-white p-4 rounded-lg font-bold text-center">
+          <div class="mb-1 text-lg">Kod promosi anda: <span class="bg-black p-1 rounded text-green-400">OKLA77</span></div>
+          <div>Ingat untuk daftar <span class="underline">hanya</span> dengan kod ini untuk akses penuh semua fungsi!</div>
+        </div>
+      </div>
+    </section>
+    <!-- Winners -->
+    <section class="bg-gray-800 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Pemenang hari ini (RM)</h3>
+      <div class="grid md:grid-cols-2 gap-4 text-left max-w-4xl mx-auto text-sm text-green-300">
+        <p>👤 Pengguna: 1218473422 – RM25.328</p>
+        <p>👤 Pengguna: 9912384741 – RM21.900</p>
+        <p>👤 Pengguna: 3099234822 – RM14.120</p>
+        <p>👤 Pengguna: 1187339121 – RM10.000</p>
+        <p>👤 Pengguna: 4412900113 – RM12.850</p>
+        <p>👤 Pengguna: 8283721091 – RM18.440</p>
+        <p>👤 Pengguna: 7751937742 – RM10.705</p>
+        <p>👤 Pengguna: 5554921811 – RM9.330</p>
+        <p>👤 Pengguna: 1983238742 – RM8.000</p>
+        <p>👤 Pengguna: 3377749301 – RM7.210</p>
+      </div>
+    </section>
+    <!-- Supported games -->
+    <section id="games" class="bg-gray-800 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Permainan yang disokong</h3>
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold mb-2">🎮 Aviator</h4>
+          <p class="text-gray-300">Ramalkan bila untuk keluarkan sebelum kapal terbang berlepas. AI kami kesan corak masa nyata.</p>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold mb-2">💣 Mines</h4>
+          <p class="text-gray-300">Elakkan bom, ambil keuntungan anda. Sistem kami cari laluan risiko rendah untuk keuntungan maksimum.</p>
+        </div>
+        <div class="bg-gray-700 p-6 rounded-xl shadow-lg">
+          <h4 class="text-xl font-bold mb-2">🥅 Penalty</h4>
+          <p class="text-gray-300">Tahu di mana nak tembak atau menyelam. Kalahkan penjaga gol dengan ramalan berdasarkan data.</p>
+        </div>
+      </div>
+    </section>
+    <!-- How it works -->
+    <section id="how" class="bg-gray-900 py-12 px-6 text-center">
+      <h3 class="text-2xl font-bold text-green-400 mb-6">Bagaimana ia berfungsi</h3>
+      <div class="max-w-3xl mx-auto space-y-4 text-gray-300">
+        <p>📡 AI kami menganalisis data langsung dan sejarah permainan 24/7.</p>
+        <p>💡 Mengenalpasti corak yang membolehkan keuntungan konsisten.</p>
+        <p>📲 Anda terima isyarat dipercayai masa nyata terus ke peranti anda.</p>
+      </div>
+    </section>
+    <section class="bg-black py-12 px-6 text-center">
+      <h3 class="text-xl font-bold text-green-400 mb-4">[ Konsol – Log pemantauan ]</h3>
+      <div class="console-box max-w-3xl mx-auto text-left" id="console">
+        <p>[INFO] Servis ramalan aktif ✅</p>
+      </div>
+    </section>
+    <footer class="text-center text-gray-500 text-sm py-6">
+      © 2025 Ramalan AI. Tidak berafiliasi dengan 1xBet. Guna secara bertanggungjawab.
+    </footer>
+  </div>
+  <script>
+    setTimeout(() => {
+      document.getElementById("loading").classList.add("hidden-screen");
+      document.getElementById("mainContent").classList.remove("hidden-screen");
+    }, 3000);
+
+    document.getElementById("connectButton").addEventListener("click", () => {
+      const userId = document.getElementById("userId").value;
+      if (userId) {
+        document.getElementById("accountIdDisplay").innerText = userId;
+        document.getElementById("connectionSuccess").classList.remove("hidden");
+        document.getElementById("errorBox").classList.add("hidden");
+      }
+    });
+
+    document.getElementById("getSignalButton").addEventListener("click", () => {
+      document.getElementById("errorBox").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
